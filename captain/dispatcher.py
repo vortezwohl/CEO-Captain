@@ -2,9 +2,8 @@ import logging
 
 from langchain_core.language_models import BaseChatModel
 
-from ceo import Agent, get_openai_model
+from ceo import Agent
 from ceo.prompt.prompt import Prompt
-from tomohiro import Tomohiro
 
 log = logging.getLogger('ceo.prompt')
 
@@ -38,9 +37,3 @@ class DispatcherPrompt(Prompt):
                         and crew.name == _a_result.strip()):
                     _fin_results.append(crew)
         return _fin_results
-
-
-if __name__ == '__main__':
-    dispatcher = DispatcherPrompt(query='who is trump?', crews=[Tomohiro(get_openai_model())])
-    result = dispatcher.invoke(get_openai_model())
-    print(result)
